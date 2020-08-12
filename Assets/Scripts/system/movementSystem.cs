@@ -13,7 +13,7 @@ public class movementSystem : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 speed = transform.up * (m.acceleration * m.accelerationForce);
         rb.AddForce(speed);
@@ -38,6 +38,8 @@ public class movementSystem : MonoBehaviour
         {
             rb.velocity = rb.velocity.normalized * GameConfig.MAX_MOWER_SPEED;
         }
+
+        rb.AddTorque(-rb.angularVelocity * 0.1f);
 
     }
 }
