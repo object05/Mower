@@ -5,18 +5,37 @@ using UnityEngine;
 
 public class movementSystem : MonoBehaviour
 {
+    MowerComponent mower;
     MovementComponent m;
     Rigidbody2D rb;
     void Start()
     {
         m = gameObject.GetComponent<MovementComponent>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        mower = gameObject.GetComponent<MowerComponent>();
     }
 
     void FixedUpdate()
     {
+
         Vector2 speed = transform.up * (m.acceleration * m.accelerationForce);
         rb.AddForce(speed);
+
+
+        if(rb.velocity == Vector2.zero)
+        {
+            if(mower.state == MowerComponent.State.RUNNING)
+            {
+                mower.state = MowerComponent.State.TURN_OFF;
+            }
+        }
+        else
+        {
+            if (mower.state == MowerComponent.State.OFF)
+            {
+                mower.state = MowerComponent.State.TURN_ON;
+            }
+        }
 
         float direction = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.up));
         if(m.acceleration > 0)
