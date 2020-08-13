@@ -18,6 +18,8 @@ public class collisionSystem : MonoBehaviour
         {
             Debug.Log("Grass");
             Destroy(other.gameObject);
+            //sound
+
             
 
             //Destroy(other.GetComponent<Ti>().g);
