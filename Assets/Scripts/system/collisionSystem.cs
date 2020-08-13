@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class collisionSystem : MonoBehaviour
 {
-    public Tilemap obstacles;
+    Tilemap obstacles;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class collisionSystem : MonoBehaviour
         if (other.tag == "Grass")
         {
             Debug.Log("Grass");
-            Debug.Log(gameObject.name);
+            Destroy(other.gameObject);
             
 
             //Destroy(other.GetComponent<Ti>().g);
