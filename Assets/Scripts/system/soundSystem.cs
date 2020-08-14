@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class soundSystem : MonoBehaviour
 {
+    public AudioClip damage;
+    public AudioClip pick;
+
+    AudioSource src;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        src = gameObject.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void playDamage()
     {
-        
+        src.PlayOneShot(damage);
+    }
+    public void playPick()
+    {
+        src.PlayOneShot(pick);
     }
 }

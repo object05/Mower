@@ -5,11 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class collisionSystem : MonoBehaviour
 {
-    Tilemap obstacles;
+    soundSystem ss;
+    GameManager gm;
 
     void Start()
     {
-        obstacles = gameObject.GetComponent<Tilemap>();
+        ss = gameObject.GetComponent<soundSystem>();
+        gm = GameManager.instance;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -18,18 +20,16 @@ public class collisionSystem : MonoBehaviour
         {
             Debug.Log("Grass");
             Destroy(other.gameObject);
+            gm.incScore();
+            ss.playPick();
             //sound
 
-            
-
-            //Destroy(other.GetComponent<Ti>().g);
-            //gameObject.GetComponent<TilemapCollider2D>().
-            //obstacles.GetTile(gameObject.transform.position.);
-            //gameObject.GetComponent<Tile>().
         }
         else if (other.tag == "Obstacle")
         {
             Debug.Log("Obstacle");
+            gm.damage();
+            ss.playDamage();
         }
     }
 
@@ -63,32 +63,6 @@ public class collisionSystem : MonoBehaviour
     //    }
     //}
 
-    //void OnTriggerEnter2D(Collider2D collision)
-    //{
-
-    //    Debug.Log("Hit! " + collision.gameObject.name);
-    //    if (collision.gameObject.name == "Tilemap_grass")
-    //    {
-    //        int contactCount = collision.contactCount;
-
-    //        if (contactCount > contacts.Length)
-    //        {
-    //            contacts = new ContactPoint2D[contactCount];
-    //        }
-    //        collision.GetContacts(contacts);
-
-    //        UnityEngine.Vector3 hitPosition = UnityEngine.Vector3.zero;
-    //        for (int i = 0; i != contactCount; ++i)
-    //        {
-    //            hitPosition.x = contacts[i].point.x;
-    //            hitPosition.y = contacts[i].point.y;
-    //            collision.gameObject.GetComponent<Tilemap>().SetTile(collision.gameObject.GetComponent<Tilemap>().WorldToCell(hitPosition), null);
-    //            //var newParticles = Instantiate(particles, hitPosition, UnityEngine.Quaternion.identity);
-    //            //var newSoundEffect = Instantiate(explodeAndHitNoise, this.transform.position, this.transform.rotation);
-    //            // StartCoroutine(DestroyParticles(newParticles));
-    //        }
-    //    }
-    //}
 
 
 

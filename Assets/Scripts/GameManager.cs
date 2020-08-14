@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     int health;
     int score;
+    public bool debug;
+    public float halfHeight;
+    public float halfWidth;
 
     public void resetScore()
     {
@@ -53,6 +56,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         MakeSingleton();
+        resetScore();
+        debug = true;
+    }
+
+    void Start()
+    {
+        halfHeight = Camera.main.orthographicSize;
+        halfWidth = Camera.main.aspect * halfHeight;
     }
 
     void MakeSingleton()

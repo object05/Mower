@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Grass
   - Obstacle
+  - Mower
+  - Grass_tile
   layers:
   - Default
   - TransparentFX
