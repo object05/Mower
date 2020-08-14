@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     int health;
     int score;
-    public bool debug;
     public float halfHeight;
     public float halfWidth;
 
@@ -57,7 +56,6 @@ public class GameManager : MonoBehaviour
     {
         MakeSingleton();
         resetScore();
-        debug = true;
     }
 
     void Start()

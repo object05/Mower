@@ -8,8 +8,8 @@ public class DebugMode : MonoBehaviour
 {
     public static DebugMode instance;
     public bool debug = false;
-    public bool grid = false;
-    private bool gridOn = false;
+    public bool detachCam = false;
+
 
     private GameObject[] grass;
     public GameObject mower;
@@ -53,24 +53,14 @@ public class DebugMode : MonoBehaviour
         {
             activeItems = 0;
             grass = GameObject.FindGameObjectsWithTag("Grass");
-
-
             foreach (GameObject g in grass)
             {
                 setLine(g);
             }
 
-
             setLine(mower);
             cameraMovement();
-
-
-            if (grid && !gridOn)
-            {
-                //Debug.Log("Grid on");
-                overlayGrid();
-                gridOn = true;
-            }
+            overlayGrid();
         }
     }
 
@@ -93,7 +83,6 @@ public class DebugMode : MonoBehaviour
         }
 
         debug = !debug;
-        gridOn = !debug;
     }
 
 
@@ -181,7 +170,6 @@ public class DebugMode : MonoBehaviour
         {
             Camera.main.transform.Translate(new Vector3(0, -camspeed * Time.deltaTime, 0));
         }
-
         if (Input.GetKey(KeyCode.Keypad7))
         {
             //Camera.main.transform.Translate(transform.forward * camspeed * Time.deltaTime, Space.Self);
@@ -193,10 +181,16 @@ public class DebugMode : MonoBehaviour
             //Camera.main.transform.Translate(transform.forward * -camspeed * Time.deltaTime, Space.Self);
         }
 
-        if (Input.GetKey(KeyCode.Keypad0))
+        if (Input.GetKeyDown(KeyCode.Keypad0))
         {
+            detachCam = false;
             Camera.main.orthographicSize = camOrtho;
-            Camera.main.transform.position = new Vector3(camXstart, camYstart, camZstart);
+            //Camera.main.transform.position = new Vector3(camXstart, camYstart, camZstart);
+
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadPeriod))
+        {
+            detachCam = true;
         }
 
         deleteGrid();
