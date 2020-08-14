@@ -16,10 +16,10 @@ public class soundSystem : MonoBehaviour
 
     public void playDamage()
     {
-        src.PlayOneShot(damage);
+        src.PlayOneShot(damage,0.1f);
     }
     public void playPick()
     {
-        src.PlayOneShot(pick);
+        src.PlayOneShot(pick,1f);
     }
 }

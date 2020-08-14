@@ -14,7 +14,15 @@ public class inputSystem : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        movement.rotation = Input.GetAxis("Horizontal");
-        movement.acceleration = Input.GetAxis("Vertical");
+        if (!GameManager.instance.ended)
+        {
+            movement.rotation = Input.GetAxis("Horizontal");
+            movement.acceleration = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            movement.rotation = 0;
+            movement.acceleration = 0;
+        }
     }
 }
